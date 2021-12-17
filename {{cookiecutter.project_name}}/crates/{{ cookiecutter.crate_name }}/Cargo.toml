@@ -1,0 +1,7 @@
+[package]
+name = "{{ cookiecutter.project_name }}-{{ cookiecutter.crate_name }}"
+version = "0.1.0"
+authors = ["{{ cookiecutter.full_name }} <{{ cookiecutter.email }}>"]
+edition = "2021"
+
+[dependencies]

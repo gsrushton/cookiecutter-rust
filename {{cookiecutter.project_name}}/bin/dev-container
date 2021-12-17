@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null 2>&1 && pwd)"
+
+export UID
+export SHELL
+export SHELL_PACKAGE=$(dpkg -S $SHELL | awk -F: '{printf $1}')
+
+USER="$(whoami)" \
+DOCKER_GID="$(cut -d: -f3 < <(getent group docker))" \
+WORKSPACE="$(dirname $DIR)" \
+  docker-compose \
+    -p {{ cookiecutter.project_name }}-$USER \
+    -f tools/docker/dev/docker-compose.yml \
+    "$@"
